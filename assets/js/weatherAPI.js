@@ -1,9 +1,7 @@
 // Apixu API Weather js file
 
 // Create function to get weather
-function getWeather(cityName){
-	var lat = 41.88;
-	var long = -87.63;
+function getWeather(cityName, lat, long){
 	// Declaring apiKey and queryURL
 	var apiKey = "dcdb5e1e6d6e436d95224746171310"; 
 	var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+Number(lat).toFixed(2)+","+Number(long).toFixed(2)+"&days=5";

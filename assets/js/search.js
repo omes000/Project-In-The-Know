@@ -1,12 +1,19 @@
- var temp;
+ var userLocations;
+ var lat, long;
 
  function initialize() {
     autocomplete = new google.maps.places.Autocomplete(
         (document.getElementById('autocomplete')),
         { types: ["(cities)"] });
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        temp=autocomplete.getPlace();
-        console.log(temp)
+	        userLocations = autocomplete.getPlace();
+	        console.log(userLocations);
+
+			userCity = userLocations.address_components[0].long_name;
+			lat = userLocations.geometry.location.lat();
+			long = userLocations.geometry.location.lng();
+
+			getWeather(userCity, lat, long);
         });
   }
 
