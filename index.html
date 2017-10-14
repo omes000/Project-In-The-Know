@@ -38,8 +38,7 @@
 				<div class = "col-lg-6 city">
 					<h2 class = "title">Denver, CO</h2>
 				</div>
-				<div class = "col-lg-6 weather">
-					<img src = "assets/images/weatherholder3.png" class = "img-responsive pull-right shadow">
+				<div class = "col-lg-6 weather" id="Chicago-weather-area">
 				</div>
 			</div>
 			
@@ -165,13 +164,12 @@
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
 	<script src="assets/js/moment.js"></script>
-<<<<<<< HEAD
 	<script src="assets/js/weatherWidget.js"></script>
-
-
-
-=======
->>>>>>> 3d7d85e6de703a8a63a56e066ae7e658bacf514c
+	<script src="assets/js/weatherAPI.js"></script>
+	<script> 
+		var cityname = "Chicago"
+		getWeather(cityname)
+	</script>
 
 </body>
 </html>
