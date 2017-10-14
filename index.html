@@ -5,7 +5,12 @@
 	<title>in the know</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="assets/css/additional_styling.scss.css">
+=======
+	<link rel="stylesheet" type="text/css" href="assets/css/additional_styling.css">
+
+>>>>>>> 3d7d85e6de703a8a63a56e066ae7e658bacf514c
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans" rel="stylesheet">
 </head>
 <body>
@@ -22,6 +27,7 @@
 	     				<button class = "btn btn-default">
 	     					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 	     				</button>
+
 	     			</span>
 	     		</div>
 	     	</div>
@@ -37,74 +43,5 @@
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
 	<script src="assets/js/moment.js"></script>
-	<script src="assets/js/weatherWidget.js"></script>
-	<script>
-		var cityName = "Chicago";
-		var forecast = "";
-		var lat = 41.88;
-		var long = -87.63
-		function gettheWeather(){
-			//var apiKey = "1fbf60ec99dc04ba8dbb5b6d3da6cbab"; 
-			//var queryURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+Number(lat).toFixed(2)+"&lon="+Number(long).toFixed(2)+"&units=imperial&cnt=7&APPID="+apiKey;
-
-			var apiKey = "dcdb5e1e6d6e436d95224746171310"; 
-			var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+Number(lat).toFixed(2)+","+Number(long).toFixed(2)+"&days=5";
-
-			// Create an AJAX call to retrieve data Log the data in console
-			$.ajax({
-				url:queryURL,
-				method: "GET"
-			}).done(function(response){
-				console.log(response);
-				weather = response;
-				var temp = weather.current.condition;
-				console.log(temp);
-
-				forecast = [{
-					currentTemp: weather.current.temp_f,
-					currentCondition: weather.current.condition.text,
-					currentConditionIcon: weather.current.condition.icon,
-					currentTime: moment.unix(weather.location.localtime_epoch).format("hh:mm a")
-				},
-				{
-					dayOneMaxTemp: weather.forecast.forecastday[1].day.maxtemp_f,
-					dayOneMinTemp: weather.forecast.forecastday[1].day.mintemp_f,
-					dayOneCondition: weather.forecast.forecastday[1].day.condition.text,
-					dayOneConditionIcon: weather.forecast.forecastday[1].day.condition.icon,
-					dateOne: getDayfromNum(new Date(weather.forecast.forecastday[1].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-				},
-				{
-					dayTwoMaxTemp: weather.forecast.forecastday[2].day.maxtemp_f,
-					dayTwoMinTemp: weather.forecast.forecastday[2].day.mintemp_f,
-					dayTwoCondition: weather.forecast.forecastday[2].day.condition.text,
-					dayTwoConditionIcon: weather.forecast.forecastday[2].day.condition.icon,
-					dateTwo: getDayfromNum(new Date(weather.forecast.forecastday[2].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-				},
-				{
-					dayThreeMaxTemp: weather.forecast.forecastday[3].day.maxtemp_f,
-					dayThreeMinTemp: weather.forecast.forecastday[3].day.mintemp_f,
-					dayThreeCondition: weather.forecast.forecastday[3].day.condition.text,
-					dayThreeConditionIcon: weather.forecast.forecastday[3].day.condition.icon,
-					dateThree: getDayfromNum(new Date(weather.forecast.forecastday[3].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-				},
-				{
-					dayFourMaxTemp: weather.forecast.forecastday[4].day.maxtemp_f,
-					dayFourMinTemp: weather.forecast.forecastday[4].day.mintemp_f,
-					dayFourCondition: weather.forecast.forecastday[4].day.condition.text,
-					dayFourConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
-					dateFour: getDayfromNum(new Date(weather.forecast.forecastday[4].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-				}
-
-				];
-
-				buildWeatherWidget(cityName, forecast);
-			});
-
-		}
-		gettheWeather();
-
-
-
-	</script>
 </body>
 </html>
