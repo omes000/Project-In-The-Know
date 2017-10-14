@@ -95,4 +95,3 @@ function buildWeatherWidget(cityName, forecast){
 	init(cityName);
 	populateWeatherWidget(forecast, cityName);
 }
-
