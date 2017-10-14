@@ -60,13 +60,13 @@ function getWeather(cityName){}
 				).getDay())
 		}
 		{
-			dayThreeMaxTemp:weather.forecast.forecastday[4].day.
+			dayFourMaxTemp:weather.forecast.forecastday[4].day.
 				maxtemp_f,
-			dayThreeMinTemp: weather.forecast.forecastday[4].day.
+			dayFourMinTemp: weather.forecast.forecastday[4].day.
 				mintemp_f,
-			dayThreeCondition: weather.forecast.forecastday[4].day.
+			dayFourCondition: weather.forecast.forecastday[4].day.
 				condition.text
-			dayThreeConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
+			dayFourConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
 				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
