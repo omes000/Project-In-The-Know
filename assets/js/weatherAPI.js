@@ -1,8 +1,9 @@
 // Apixu API Weather js file
 
 // Create function to get weather
-function getWeather(cityName){}
-
+function getWeather(cityName){
+	var lat = 41.88;
+	var long = -87.63;
 	// Declaring apiKey and queryURL
 	var apiKey = "dcdb5e1e6d6e436d95224746171310"; 
 	var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+Number(lat).toFixed(2)+","+Number(long).toFixed(2)+"&days=5";
@@ -29,7 +30,7 @@ function getWeather(cityName){}
 			dayOneMinTemp: weather.forecast.forecastday[1].day.
 				mintemp_f,
 			dayOneCondition: weather.forecast.forecastday[1].day.
-				condition.text
+				condition.text,
 			dayOneConditionIcon: weather.forecast.forecastday[1].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
 				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
@@ -41,7 +42,7 @@ function getWeather(cityName){}
 			dayTwoMinTemp: weather.forecast.forecastday[2].day.
 				mintemp_f,
 			dayTwoCondition: weather.forecast.forecastday[2].day.
-				condition.text
+				condition.text,
 			dayTwoConditionIcon: weather.forecast.forecastday[2].day.condition.icon,
 			dateTwo: getDayfromNum(new Date(weather.forecast.
 				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
@@ -53,19 +54,19 @@ function getWeather(cityName){}
 			dayThreeMinTemp: weather.forecast.forecastday[3].day.
 				mintemp_f,
 			dayThreeCondition: weather.forecast.forecastday[3].day.
-				condition.text
+				condition.text,
 			dayThreeConditionIcon: weather.forecast.forecastday[3].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
 				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
-		}
+		},
 		{
 			dayFourMaxTemp:weather.forecast.forecastday[4].day.
 				maxtemp_f,
 			dayFourMinTemp: weather.forecast.forecastday[4].day.
 				mintemp_f,
 			dayFourCondition: weather.forecast.forecastday[4].day.
-				condition.text
+				condition.text,
 			dayFourConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
 				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
@@ -74,6 +75,6 @@ function getWeather(cityName){}
 		];
 
 		buildWeatherWidget(cityName, forecast);
-		})
+		});
 }
 
