@@ -1,0 +1,186 @@
+ html{
+
+}
+
+
+
+td{
+    text-align: center;
+}
+
+#header-panel{
+    background-color: black;
+    color: white;
+}
+
+#currEmp,#addEmp{
+    background-color: #4285F4;
+    color: white;
+}
+
+.info{
+
+}
+
+.city{
+
+}
+.border {
+    border: 1px black solid;
+}
+
+#form-container{
+    position: relative;
+}
+
+#add-gif{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#gif-input{
+    color: black;
+}
+
+.gap-top{
+    margin-top: 20px;
+}
+
+.gap-right{
+    margin-right:10px;
+}
+
+.gap-bottom{
+    margin-bottom:20px;
+
+}
+
+.padding-right{
+    padding-right: 30px;
+}
+
+.padding-left{
+    padding-left: 30px;
+}
+
+.padding-top{
+    padding-top: 30px;
+}
+
+.padding-top-img{
+    padding-top: 20px;
+}
+
+.padding-bottom{
+    padding-bottom: 10px;
+}
+
+.gap-left{
+    margin-left: 10px;
+}
+
+.gif{
+    xalign-self:center;
+}
+
+#gifs{
+    xdisplay: flex;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+
+}
+ 
+.btn-primary {
+    background-color: red;
+    border-color: #080A30;
+    color: #ffffff;
+}
+
+.btn-success {
+    background-color: #18BC2F;
+    border-color: #080A30;
+    color: #ffffff;
+}
+ 
+.btn-primary:hover, .btn-primary:focus{
+    background-color: #FF998F;
+    border-color: white;
+}
+
+.btn-success:hover, .btn-success:focus{
+    background-color: #98e698;
+    border-color: white;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background-color: #A11607 !important;
+    box-shadow: none;
+    border-color: white !important;
+}
+
+.btn-success:active, .btn-success.active {
+    background-color: #98e698 !important;
+    box-shadow: none;
+    border-color: white !important;
+}
+th{
+    font-weight: bold;
+    text-align: center;
+}
+
+.card {
+  border-radius: 0;
+  border: none;
+  padding: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+#city1{
+    background-color: #E54C85;
+}
+
+.shadow{
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
+    border-radius: 5px;
+
+}
+
+#city2{
+    background-color: #1A70F9;
+}
+
+#city3{
+    background-color: #2B5A84;
+}
+
+.title{
+    font-family: 'Work Sans', sans-serif;
+}
+
+
+.xcard {
+    width: 50px;
+    height:100px;
+    color: #fff;
+    text-align: center;
+    background-color: #3D6AA2;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    margin: 2em;
+    display: inline-block
+}
+
+.card-header {
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 200px;
+    z-index: 1;
+    text-align: left;
+}

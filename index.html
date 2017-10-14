@@ -6,33 +6,35 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/additional_styling.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans" rel="stylesheet">
 </head>
 <body>
 	<div class = "container">
-		<div class = "row">
-			<div class = "col-lg-6">
-				<img src = "http://placehold.it/100x100" class = "img-responsive gap-top">in the know
+		<div class = "row gap-top">
+			<div class = "col-lg-6 ">
+				<img src = "assets/images/logo3.png" width = "100px" class = "img-responsive">
 			</div>
-			<div class = "col-lg-6">
-				<div id="locationField" class = "input-group gap-top text-center">
+			<div class="col-lg-2"></div>
+			<div class = "col-lg-4">
+				<div id="locationField" class = "input-group">
 	     			<input id="autocomplete" placeholder="Enter desired location" onFocus="" type="text" class = "form-control"></input>
 	     			<span class = "input-group-btn">
+	     				<button class = "btn btn-default">
+	     					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	     				</button>
 
-	     				<button class = "btn btn-default gap-left">Press Me</button>
 	     			</span>
 	     		</div>
 	     	</div>
 		</div>
-
-		<div class = "row" id = "city1">
-			<div class = "row">
-				
-			</div>
-	
-
+		<div class = "row">
+			<div class="col-lg-12" style="height:25px;"></div>
 		</div>
-
 	</div>
-	
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
+	<script src="assets/js/moment.js"></script>
+
 </body>
 </html>
