@@ -1,5 +1,6 @@
-/*Creating all the container divs for the weather widget. Weather widget has 3 main containers:
-	1. The overall weather Widget container that contains the next two
+/* Weather Widget
+Create all container divs for the Weather Widget. The Weather Widget has 3 main containers:
+	1. The overall weather Widget container that contains the next two items below:
 	2. The header container that contains the current weather information
 	3. The forecast container that contains the weather information for the next 4 days*/
 
@@ -12,10 +13,10 @@ function buildWeatherWidgetContainers(cityName){
 	weatherWidget.attr('id', cityName+'-weather');
 
 	weatherWidgetHeader.addClass('card-header');
-	weatherWidgetHeader.attr('id', cityName + '-weather-header');
+	weatherWidgetHeader.attr('id', cityName +'-weather-header');
 
 	weatherWidgetForecast.addClass('forecast');
-	weatherWidgetForecast.attr('id', cityName + '-weather-forecast');
+	weatherWidgetForecast.attr('id', cityName +'-weather-forecast');
 	weatherWidget.append(weatherWidgetHeader,weatherWidgetForecast);
 	$("#"+cityName+'-weather-area').append(weatherWidget);
 }
@@ -23,7 +24,7 @@ function buildWeatherWidgetContainers(cityName){
 var grid;
 function init(cityName){
 	grid = new Minigrid({
-		container: '#'+cityName +'-weather-forecast',
+		container: '#'+cityName + '-weather-forecast',
 		item: cityName+'-weather-cards',
 		gutter: 2
 	});
@@ -95,3 +96,4 @@ function buildWeatherWidget(cityName, forecast){
 	init(cityName);
 	populateWeatherWidget(forecast, cityName);
 }
+

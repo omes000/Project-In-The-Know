@@ -1,3 +1,5 @@
+/* firebase.js 
+Documentation:  https://www.firebase.com/docs/web/quickstart.html */
 
   // Initialize Firebase
   var config = {

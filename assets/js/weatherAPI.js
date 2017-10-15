@@ -1,4 +1,5 @@
-// Apixu API Weather js file
+/* Apixu API Weather js
+Documentation:  https://www.apixu.com/doc/ */
 
 // Create function to get weather
 function getWeather(cityName, lat, long){
@@ -14,7 +15,6 @@ function getWeather(cityName, lat, long){
 		weather = response;
 
 		// Get array of forecast: temp(f),text,icon localtime.  Then output for each day for max/min temp, condition, icon and format of date.
-
 		forecast = [{
 			currentTemp: weather.current.temp_f,
 			currentCondition: weather.current.condition.text,
@@ -43,7 +43,7 @@ function getWeather(cityName, lat, long){
 				condition.text,
 			dayTwoConditionIcon: weather.forecast.forecastday[2].day.condition.icon,
 			dateTwo: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
+				forecastday[2].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
 		},
 		{
@@ -55,7 +55,7 @@ function getWeather(cityName, lat, long){
 				condition.text,
 			dayThreeConditionIcon: weather.forecast.forecastday[3].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
+				forecastday[3].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
 		},
 		{
@@ -67,11 +67,12 @@ function getWeather(cityName, lat, long){
 				condition.text,
 			dayFourConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
+				forecastday[4].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
 		}
 		];
 
+		// Weather Widget
 		buildWeatherWidget(cityName, forecast);
 		});
 }
