@@ -43,7 +43,7 @@ function getWeather(cityName, lat, long){
 				condition.text,
 			dayTwoConditionIcon: weather.forecast.forecastday[2].day.condition.icon,
 			dateTwo: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
+				forecastday[2].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
 		},
 		{
@@ -55,7 +55,7 @@ function getWeather(cityName, lat, long){
 				condition.text,
 			dayThreeConditionIcon: weather.forecast.forecastday[3].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
+				forecastday[3].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
 		},
 		{
@@ -67,7 +67,7 @@ function getWeather(cityName, lat, long){
 				condition.text,
 			dayFourConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
 			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
+				forecastday[4].date.replace(/-/, '/').replace(/-/,'/')
 				).getDay())
 		}
 		];
