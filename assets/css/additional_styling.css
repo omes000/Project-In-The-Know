@@ -181,6 +181,9 @@ th{
 
 .forecast{
     min-height: 150px;
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .card-header {
