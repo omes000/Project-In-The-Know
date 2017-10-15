@@ -7,7 +7,7 @@ function displayNews() {
     data: {
       "q": $("#autocomplete").val(),
       "mkt": "en-US",
-      "count": "2",
+      "count": "3",
       "offset": "0"
     },
     beforeSend: function(xhrObj) {
@@ -25,16 +25,6 @@ function displayNews() {
       console.log("imageURL: " + NEWS[1].image.thumbnail.contentUrl)
       console.log("newsSourceURL: " + NEWS[1].url)*/
       console.log(NEWS.length);
-
-
-         //  for (var i=0; i<NEWS.length; i++){
-         //  var newsName = $(".media-heading").append(NEWS[i].name.toUpperCase());
-         //  var newsDescription = $(".media-description" ).append(NEWS[i].description);
-         // //  var newsURLs = NEWS[i].url;
-         //  var newsThumbnail = $(".media-object").attr("src",NEWS[i].image.thumbnail.contentUrl);
-         //  //$(".media").append(newsName)
-         //  //$(".media").append(newsDescription)
-         //  //displayeachNews.append($(".eachCity"))
     
       buildingNewsContainer("chicago", NEWS.length);
       populateNewsInfo("chicago", NEWS);
@@ -45,20 +35,40 @@ function displayNews() {
 
   function buildingNewsContainer(cityname, newslength) {
     for (i=0; i<newslength; i++){
-      var eachNews = $("<div>");
+      var eachNews = $("<div>").css("height", "100px").css("margin", "30px auto")
       eachNews.addClass("media")
       eachNews.attr("id",cityname + "-media-" + i)
     
-      var eachNewsImage = $("<div>");
-      eachNewsImage.addClass("media-left")
-      eachNewsImage.attr("id",cityname + "-media-image-container-" + i)
-      eachNews.append(eachNewsImage)
+      var eachNewsImageArea = $("<div>");
+      eachNewsImageArea.addClass("media-left")
+      eachNewsImageArea.attr("id",cityname + "-media-image-container-" + i)
+      eachNews.append(eachNewsImageArea)
 
+      var eachNewsImage = $("<img>");
+      eachNewsImage.addClass('media-object')
+      eachNewsImage.attr('id', cityname + '-media-image-' + i)
+      eachNewsImageArea.append(eachNewsImage)
 
       var eachNewsBody = $("<div>");
       eachNewsBody.addClass("media-body")
       eachNewsBody.attr("id",cityname + "-media-body-" + i)
       eachNews.append(eachNewsBody)
+
+      var eachNewsHeading = $("<div>");
+      eachNewsHeading.addClass("media-heading")
+      eachNewsHeading.attr("id",cityname + "-media-heading-" + i)
+      eachNewsBody.append(eachNewsHeading)
+
+      var eachNewsSubHeading = $("<div>");
+      eachNewsSubHeading.addClass("media-subheading")
+      eachNewsSubHeading.attr("id",cityname + "-media-subheading-" + i)
+      eachNewsBody.append(eachNewsSubHeading)
+
+      var eachNewsDescription = $("<div>");
+      eachNewsDescription.addClass("media-description")
+      eachNewsDescription.attr("id",cityname + "-media-description-" + i)
+      eachNewsBody.append(eachNewsDescription)
+
 
       console.log(cityname);
       $("#" + cityname + '-media').append(eachNews)
@@ -68,14 +78,11 @@ function displayNews() {
 
   function populateNewsInfo (cityname, news) {
        for (var i=0; i<news.length; i++){
-          var newsName = $("#"+cityname + '-media-body-' + i).append(news[i].name.toUpperCase());
-          var newsDescription = $("#"+cityname + '-media-body-' + i).append(news[i].description);
+        var newsName = $("#"+cityname + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("src",news[i].url);
+        var newsDescription = $("#"+cityname + '-media-description-' + i).append(news[i].description);
+        var newssubHeading = $("#"+cityname + '-media-subheading-' + i).append("Date Published: " + news[i].datePublished).append(", News Source: " + news[i].provider[0].name).css("font-size", "0.8em").css("font-style","italic")
          //  var newsURLs = NEWS[i].url;
-         var imgLeft = $("<img>");
-         imgLeft.addClass('media-object').attr('id', cityname + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
-
-         $("#"+cityname + "-media-image-container-" + i).append(imgLeft);
-
+        var newsImage = $("#"+cityname + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
         }
-    }
+  }
 
