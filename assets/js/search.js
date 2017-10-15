@@ -1,21 +1,16 @@
- var userLocations;
- var lat, long;
-
 function initialize() {
     autocomplete = new google.maps.places.Autocomplete(
         (document.getElementById('autocomplete')),
         { types: ["(cities)"] });
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
-	        userLocations = autocomplete.getPlace();
-	        console.log(userLocations);
-	        var test = formatUserLocationObject(userLocations);
-	        console.log(test);
+	        var userLocation = formatUserLocationObject(autocomplete.getPlace());
+	        //$(document).on("click", ".btn", console.log(userLocation));
+	        //console.log(userLocation);
+			//getWeather(userLocation);
+			buildCityCards(userLocation);
+			getWeather(userLocation);
+			displayNews(userLocation);
 
-			userCity = userLocations.address_components[0].long_name;
-			lat = userLocations.geometry.location.lat();
-			long = userLocations.geometry.location.lng();
-
-			getWeather(userCity, lat, long);
         });
 }
 
@@ -23,12 +18,13 @@ function formatUserLocationObject(userLocation){
 	var userLocationObject = {};
 
 	var lengthAddressComponents = userLocation.address_components.length;
-	var cityName = userLocations.address_components[0].long_name;
+	var cityName = userLocation.address_components[0].long_name;
+	var cityNameforIDs = cityName.replace(" ", "");
 
-	var countryNameHolder = userLocations.address_components[lengthAddressComponents - 1].long_name;
+	var countryNameHolder = userLocation.address_components[lengthAddressComponents - 1].long_name;
 	var countryName;
 
-	var stateNameHolder = userLocations.address_components[lengthAddressComponents - 2].long_name;
+	var stateNameHolder = userLocation.address_components[lengthAddressComponents - 2].long_name;
 	var stateName;
 
 	var lat = userLocation.geometry.location.lat();
@@ -40,12 +36,13 @@ function formatUserLocationObject(userLocation){
 		stateName = stateNameHolder;
 
 	} else{
-		countryName = userLocations.address_components[lengthAddressComponents - 2].long_name;
-		stateName = userLocations.address_components[lengthAddressComponents - 3].long_name
+		countryName = userLocation.address_components[lengthAddressComponents - 2].long_name;
+		stateName = userLocation.address_components[lengthAddressComponents - 3].long_name
 	}
 
 	userLocationObject = {
 		city: cityName,
+		cityID: cityNameforIDs,
 		state: stateName,
 		country: countryName,
 		lat: lat.toFixed(2),
@@ -57,8 +54,27 @@ function formatUserLocationObject(userLocation){
 }
 
 
-function buildCityCards(){
+function buildCityCards(userLocation){
+	var cityCard = $("<div>");
+	cityCard.addClass('row gap-top gap-bottom big-card').attr('id', userLocation.cityID);
 
+	var infoContainer = $("<div>");
+	infoContainer.addClass('info col-lg-12 padding-top');
+
+	var cityNameDisplay = $("<div>");
+	cityNameDisplay.addClass('col-lg-6 city').html("<h2 class = 'title'>"+userLocation.city+"</h2>");
+
+	var weatherDisplay = $("<div>");
+	weatherDisplay.addClass("col-lg-6 weather").attr('id', userLocation.cityID+'-weather-area');
+
+	infoContainer.append(cityNameDisplay, weatherDisplay);
+
+	var newsContainer = $("<div>");
+	newsContainer.addClass('news col-lg-12').attr('id', userLocation.cityID + '-media');
+
+	cityCard.append(infoContainer, newsContainer);
+
+	$('.container').append(cityCard);
 
 }
 

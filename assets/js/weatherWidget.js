@@ -4,28 +4,29 @@ Create all container divs for the Weather Widget. The Weather Widget has 3 main 
 	2. The header container that contains the current weather information
 	3. The forecast container that contains the weather information for the next 4 days*/
 
-function buildWeatherWidgetContainers(cityName){
+function buildWeatherWidgetContainers(userLocation){
 	var weatherWidget = $("<div>");
 	var weatherWidgetHeader = $("<div>");
 	var weatherWidgetForecast = $("<div>");
 
-	weatherWidget.addClass('weather-widget');
-	weatherWidget.attr('id', cityName+'-weather');
+	weatherWidget.addClass('weather-widget pull-right');
+	weatherWidget.attr('id', userLocation.cityID+'-weather');
 
 	weatherWidgetHeader.addClass('card-header');
-	weatherWidgetHeader.attr('id', cityName +'-weather-header');
+	weatherWidgetHeader.attr('id', userLocation.cityID +'-weather-header');
 
 	weatherWidgetForecast.addClass('forecast');
-	weatherWidgetForecast.attr('id', cityName +'-weather-forecast');
+	weatherWidgetForecast.attr('id', userLocation.cityID +'-weather-forecast');
 	weatherWidget.append(weatherWidgetHeader,weatherWidgetForecast);
-	$("#"+cityName+'-weather-area').append(weatherWidget);
+	console.log(weatherWidget);
+	$("#"+userLocation.cityID+'-weather-area').append(weatherWidget);
 }
 
 var grid;
-function init(cityName){
+function init(userLocation){
 	grid = new Minigrid({
-		container: '#'+cityName + '-weather-forecast',
-		item: cityName+'-weather-cards',
+		container: '#'+userLocation.cityID + '-weather-forecast',
+		item: userLocation.cityID+'-weather-cards',
 		gutter: 2
 	});
 	grid.mount();
@@ -35,12 +36,12 @@ function update() {
 	grid.mount();
 }
 
-function buildWeatherWidgetCards(cityName){
+function buildWeatherWidgetCards(userLocation){
 	for (var i = 1; i<5; i++){
 		var newDiv = $("<div>");
-		newDiv.addClass("card").attr('grid-id', cityName+'-weather-cards');
-		newDiv.attr('id', cityName+'-weather-cards'+i);
-		$("#"+cityName+'-weather-forecast').append(newDiv);
+		newDiv.addClass("card").attr('grid-id', userLocation.cityID+'-weather-cards');
+		newDiv.attr('id', userLocation.cityID+'-weather-cards'+i);
+		$("#"+userLocation.cityID+'-weather-forecast').append(newDiv);
 	}
 }
 
@@ -70,30 +71,30 @@ function getDayfromNum(num){
 	return day;
 }
 
-function populateWeatherWidget(forecast, cityName){
-	$('#'+cityName+'-weather-header').html("<div class = row><div class = 'col-xs-4 currWeath'><img src = 'http://"+forecast[0].currentConditionIcon+"' width='100' height='100' alt='Today' class ='img-responsive center-block' id = 'currIcon'></div><div class = 'col-xs-4 currWeath'><div class='currTemp'>"+forecast[0].currentTemp+"&#176;</div></div><div class = 'col-xs-4 currWeath'>"+forecast[0].currentCondition+"</div></div><div class ='row' id = 'currTime'>"+forecast[0].currentTime+"</div>");
+function populateWeatherWidget(userLocation, forecast){
+	$('#'+userLocation.cityID+'-weather-header').html("<div class = row><div class = 'col-xs-4 currWeath'><img src = 'http://"+forecast[0].currentConditionIcon+"' width='100' height='100' alt='Today' class ='img-responsive center-block' id = 'currIcon'></div><div class = 'col-xs-4 currWeath'><div class='currTemp'>"+forecast[0].currentTemp+"&#176;</div></div><div class = 'col-xs-4 currWeath'>"+forecast[0].currentCondition+"</div></div><div class ='row' id = 'currTime'>"+forecast[0].currentTime+"</div>");
 
-	$("#"+cityName+'-weather-cards'+'1').html("<img src = 'http://"+forecast[1].dayOneConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
-	$("#"+cityName+'-weather-cards'+'1').prepend(forecast[1].dateOne);
-	$("#"+cityName+'-weather-cards'+'1').append(forecast[1].dayOneCondition, "<br> " ,Math.round(forecast[1].dayOneMaxTemp), "&#176;/", Math.round(forecast[1].dayOneMinTemp)+"&#176;");
+	$("#"+userLocation.cityID+'-weather-cards'+'1').html("<img src = 'http://"+forecast[1].dayOneConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
+	$("#"+userLocation.cityID+'-weather-cards'+'1').prepend(forecast[1].dateOne);
+	$("#"+userLocation.cityID+'-weather-cards'+'1').append(forecast[1].dayOneCondition, "<br> " ,Math.round(forecast[1].dayOneMaxTemp), "&#176;/", Math.round(forecast[1].dayOneMinTemp)+"&#176;");
 
-	$("#"+cityName+'-weather-cards'+'2').html("<img src = 'http://"+forecast[2].dayTwoConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
-	$("#"+cityName+'-weather-cards'+'2').prepend(forecast[2].dateTwo);
-	$("#"+cityName+'-weather-cards'+'2').append(forecast[2].dayTwoCondition, "<br> " ,Math.round(forecast[2].dayTwoMaxTemp), "&#176;/", Math.round(forecast[2].dayTwoMinTemp)+"&#176;");
+	$("#"+userLocation.cityID+'-weather-cards'+'2').html("<img src = 'http://"+forecast[2].dayTwoConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
+	$("#"+userLocation.cityID+'-weather-cards'+'2').prepend(forecast[2].dateTwo);
+	$("#"+userLocation.cityID+'-weather-cards'+'2').append(forecast[2].dayTwoCondition, "<br> " ,Math.round(forecast[2].dayTwoMaxTemp), "&#176;/", Math.round(forecast[2].dayTwoMinTemp)+"&#176;");
 
-	$("#"+cityName+'-weather-cards'+'3').html("<img src = 'http://"+forecast[3].dayThreeConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
-	$("#"+cityName+'-weather-cards'+'3').prepend(forecast[3].dateThree);
-	$("#"+cityName+'-weather-cards'+'3').append(forecast[3].dayThreeCondition, "<br> " ,Math.round(forecast[3].dayThreeMaxTemp), "&#176;/", Math.round(forecast[3].dayThreeMinTemp)+"&#176;");
+	$("#"+userLocation.cityID+'-weather-cards'+'3').html("<img src = 'http://"+forecast[3].dayThreeConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
+	$("#"+userLocation.cityID+'-weather-cards'+'3').prepend(forecast[3].dateThree);
+	$("#"+userLocation.cityID+'-weather-cards'+'3').append(forecast[3].dayThreeCondition, "<br> " ,Math.round(forecast[3].dayThreeMaxTemp), "&#176;/", Math.round(forecast[3].dayThreeMinTemp)+"&#176;");
 
-	$("#"+cityName+'-weather-cards'+'4').html("<img src = 'http://"+forecast[4].dayFourConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
-	$("#"+cityName+'-weather-cards'+'4').prepend(forecast[4].dateFour);
-	$("#"+cityName+'-weather-cards'+'4').append(forecast[4].dayFourCondition, "<br> " ,Math.round(forecast[4].dayFourMaxTemp), "&#176;/", Math.round(forecast[4].dayFourMinTemp)+"&#176;");
+	$("#"+userLocation.cityID+'-weather-cards'+'4').html("<img src = 'http://"+forecast[4].dayFourConditionIcon+"' width = '40' height = '40' class = 'img-responsive center-block'>");
+	$("#"+userLocation.cityID+'-weather-cards'+'4').prepend(forecast[4].dateFour);
+	$("#"+userLocation.cityID+'-weather-cards'+'4').append(forecast[4].dayFourCondition, "<br> " ,Math.round(forecast[4].dayFourMaxTemp), "&#176;/", Math.round(forecast[4].dayFourMinTemp)+"&#176;");
 }
 
-function buildWeatherWidget(cityName, forecast){
-	buildWeatherWidgetContainers(cityName);
-	buildWeatherWidgetCards(cityName);
-	init(cityName);
-	populateWeatherWidget(forecast, cityName);
+function buildWeatherWidget(userLocation, forecast){
+	buildWeatherWidgetContainers(userLocation);
+	buildWeatherWidgetCards(userLocation);
+	init(userLocation);
+	populateWeatherWidget(userLocation, forecast);
 }
 
