@@ -1,4 +1,6 @@
-	
+/* search.js using Bing API News 
+Documentation:  https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web */
+
 $(document).on("click", ".btn", displayNews);
 function displayNews() {
 

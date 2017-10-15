@@ -1,4 +1,5 @@
-// Apixu API Weather js file
+/* Apixu API Weather js
+Documentation:  https://www.apixu.com/doc/ */
 
 // Create function to get weather
 function getWeather(cityName, lat, long){
@@ -14,7 +15,6 @@ function getWeather(cityName, lat, long){
 		weather = response;
 
 		// Get array of forecast: temp(f),text,icon localtime.  Then output for each day for max/min temp, condition, icon and format of date.
-
 		forecast = [{
 			currentTemp: weather.current.temp_f,
 			currentCondition: weather.current.condition.text,
@@ -72,6 +72,7 @@ function getWeather(cityName, lat, long){
 		}
 		];
 
+		// Weather Widget
 		buildWeatherWidget(cityName, forecast);
 		});
 }
