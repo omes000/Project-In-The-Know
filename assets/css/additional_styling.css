@@ -202,7 +202,6 @@ th{
     text-align: left;
 }
 
-<<<<<<< HEAD
 
 .media {
     color: white;
@@ -228,7 +227,7 @@ th{
     font-size: 0.8em;
     font-style: italic;
 }
-=======
+
 html,
 body {
   width: 100%;
@@ -414,4 +413,4 @@ h2 {
 #currTime{
     text-align: center;
 }
->>>>>>> 1592280ceb6a141896457c0113230afdf5a6f42e
+
