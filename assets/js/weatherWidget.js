@@ -1,19 +1,3 @@
-// Weather Widget: Apixu.com JSON Weather API
-
-// Declare variables for Apixu apiKey and queryURL
-	var apiKey = "dcdb5e1e6d6e436d95224746171310"; 
-	var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+Number(lat).toFixed(2)+","+Number(long).toFixed(2)+"&days=5";
-
-// Create an AJAX call to retrieve the data and log into the console
-	$.ajax({
-		url:queryURL,
-		method: "GET"
-	}).done(function(response){
-		console.log(response);
-		weather = response;
-		var temp = weather.current.condition;
-		console.log(temp);
-
 /* Weather Widget
 Create all container divs for the Weather Widget. The Weather Widget has 3 main containers:
 	1. The overall weather Widget container that contains the next two items below:
@@ -29,10 +13,10 @@ function buildWeatherWidgetContainers(cityName){
 	weatherWidget.attr('id', cityName+'-weather');
 
 	weatherWidgetHeader.addClass('card-header');
-	weatherWidgetHeader.attr('id', cityName '-weather-header');
+	weatherWidgetHeader.attr('id', cityName +'-weather-header');
 
 	weatherWidgetForecast.addClass('forecast');
-	weatherWidgetForecast.attr('id', cityName '-weather-forecast');
+	weatherWidgetForecast.attr('id', cityName +'-weather-forecast');
 	weatherWidget.append(weatherWidgetHeader,weatherWidgetForecast);
 	$("#"+cityName+'-weather-area').append(weatherWidget);
 }
@@ -40,7 +24,7 @@ function buildWeatherWidgetContainers(cityName){
 var grid;
 function init(cityName){
 	grid = new Minigrid({
-		container: '#'+cityName'-weather-forecast',
+		container: '#'+cityName + '-weather-forecast',
 		item: cityName+'-weather-cards',
 		gutter: 2
 	});
