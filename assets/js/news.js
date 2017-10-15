@@ -20,12 +20,14 @@ function displayNews() {
       console.log(response)
       var NEWS = response.value
       console.log(NEWS)
-      /*console.log(NEWS[1].name)
-      console.log(NEWS[1].description)
-      console.log("date published: " + NEWS[1].datePublished)
-      console.log("news agency: " + NEWS [1].provider[0].name)
-      console.log("imageURL: " + NEWS[1].image.thumbnail.contentUrl)
-      console.log("newsSourceURL: " + NEWS[1].url)*/
+      // console.log(NEWS[1].name)
+      // console.log(NEWS[1].description)
+        console.log(NEWS[1].datePublished)
+        console.log(moment().utc().format())
+        console.log(moment.parseZone(NEWS[1].datePublished).local().fromNow())
+      // console.log("news agency: " + NEWS [1].provider[0].name)
+      // console.log("imageURL: " + NEWS[1].image.thumbnail.contentUrl)
+      // console.log("newsSourceURL: " + NEWS[1].url)
       console.log(NEWS.length);
     
       buildingNewsContainer("chicago", NEWS.length);
@@ -37,7 +39,7 @@ function displayNews() {
 
   function buildingNewsContainer(cityname, newslength) {
     for (i=0; i<newslength; i++){
-      var eachNews = $("<div>").css("height", "100px").css("margin", "30px auto")
+      var eachNews = $("<div>")
       eachNews.addClass("media")
       eachNews.attr("id",cityname + "-media-" + i)
     
@@ -56,14 +58,16 @@ function displayNews() {
       eachNewsBody.attr("id",cityname + "-media-body-" + i)
       eachNews.append(eachNewsBody)
 
-      var eachNewsHeading = $("<div>");
+      var eachNewsHeading = $("<a>");
       eachNewsHeading.addClass("media-heading")
       eachNewsHeading.attr("id",cityname + "-media-heading-" + i)
+      //eachNewsHeading.css("font-size", "1.3em")
       eachNewsBody.append(eachNewsHeading)
 
       var eachNewsSubHeading = $("<div>");
       eachNewsSubHeading.addClass("media-subheading")
       eachNewsSubHeading.attr("id",cityname + "-media-subheading-" + i)
+      //eachNewsSubHeading.css("margin-bottom","10px").css("font-size", "0.8em").css("font-style","italic")
       eachNewsBody.append(eachNewsSubHeading)
 
       var eachNewsDescription = $("<div>");
@@ -80,10 +84,9 @@ function displayNews() {
 
   function populateNewsInfo (cityname, news) {
        for (var i=0; i<news.length; i++){
-        var newsName = $("#"+cityname + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("src",news[i].url);
-        var newsDescription = $("#"+cityname + '-media-description-' + i).append(news[i].description);
-        var newssubHeading = $("#"+cityname + '-media-subheading-' + i).append("Date Published: " + news[i].datePublished).append(", News Source: " + news[i].provider[0].name).css("font-size", "0.8em").css("font-style","italic")
-         //  var newsURLs = NEWS[i].url;
+        var newsName = $("#"+cityname + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("href",news[i].url).attr("target","_blank")
+        var newsDescription = $("#"+cityname + '-media-description-' + i).append(news[i].description)
+        var newssubHeading = $("#"+cityname + '-media-subheading-' + i).append(news[i].provider[0].name).append(" - " + moment.parseZone(news[i].datePublished).local().fromNow())
         var newsImage = $("#"+cityname + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
         }
   }

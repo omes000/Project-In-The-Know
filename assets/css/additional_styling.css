@@ -184,3 +184,29 @@ th{
     z-index: 1;
     text-align: left;
 }
+
+
+.media {
+    color: white;
+    margin: 50px auto;
+}
+
+.media-body a:link {
+    color: white;
+    font-size: 1.3em;
+}
+
+.media-body a:visited {
+    color: #cccbcb;
+}
+
+/* mouse over link */
+.media-body a:hover {
+    text-decoration: underline;
+}
+
+.media-subheading {
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    font-style: italic;
+}
