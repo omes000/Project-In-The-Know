@@ -5,7 +5,6 @@ function initialize() {
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
 	        var userLocation = formatUserLocationObject(autocomplete.getPlace());
 	        //$(document).on("click", ".btn", console.log(userLocation));
-	        //console.log(userLocation);
 			//getWeather(userLocation);
 			buildCityCards(userLocation);
 			getWeather(userLocation);
@@ -30,6 +29,8 @@ function formatUserLocationObject(userLocation){
 	var lat = userLocation.geometry.location.lat();
 	var long = userLocation.geometry.location.lng();
 
+	var fullAddress = userLocation.formatted_address;
+
 	//check if the last element in the address component is a number; if it is not then we keep it the same. if it is, then we set country name equal to the element before the last. The use case is currently seen for Australia, Kazakhstan, 
 	if (isNaN(parseInt(countryNameHolder))){
 		countryName = countryNameHolder;
@@ -46,8 +47,10 @@ function formatUserLocationObject(userLocation){
 		state: stateName,
 		country: countryName,
 		lat: lat.toFixed(2),
-		long: long.toFixed(2)
+		long: long.toFixed(2),
+		full: fullAddress
 	}
+
 
 	return userLocationObject;
 	
@@ -62,7 +65,7 @@ function buildCityCards(userLocation){
 	infoContainer.addClass('info col-lg-12 padding-top');
 
 	var cityNameDisplay = $("<div>");
-	cityNameDisplay.addClass('col-lg-6 city').html("<h2 class = 'title'>"+userLocation.city+"</h2>");
+	cityNameDisplay.addClass('col-lg-6 city').html("<h2 class = 'title'>"+userLocation.city + ", " + userLocation.country+"</h2>");
 
 	var weatherDisplay = $("<div>");
 	weatherDisplay.addClass("col-lg-6 weather").attr('id', userLocation.cityID+'-weather-area');
