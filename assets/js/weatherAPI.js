@@ -13,13 +13,13 @@ function getWeather(userLocation){
 		method: "GET"
 	}).done(function(response){
 		weather = response;
-
+		console.log(response)
 		// Get array of forecast: temp(f),text,icon localtime.  Then output for each day for max/min temp, condition, icon and format of date.
 		forecast = [{
 			currentTemp: weather.current.temp_f,
 			currentCondition: weather.current.condition.text,
 			currentConditionIcon: weather.current.condition.icon,
-			currentTime: moment.unix(weather.location.localtime_epoch).format("hh:mm a")
+			currentTime: moment(weather.location.localtime).format("hh:mm a")
 		},
 		{
 			dayOneMaxTemp:weather.forecast.forecastday[1].day.maxtemp_f,
