@@ -14,13 +14,9 @@ function displayNews(userLocation) {
 			"offset": "0"
 		},
 		beforeSend: function(xhrObj) {
-<<<<<<< HEAD
 			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "3a50fa406cbb40128ac6c801d830fc6a");
-=======
-			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "2a91e1b45c85447893865add83612801");
->>>>>>> bf151f3a1d38752322253626260b2e51db3a7acf
 		},
-		type: "GET",
+			type: "GET",
 	}).done(function(response) {
 		console.log(response)
 		var news = response.value

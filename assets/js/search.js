@@ -17,9 +17,9 @@ function initialize() {
 					// displayNews(userLocation);
 			        
 
-    			//});
+    			});
 
-	
+		}
 
 			//addToFirebase(userLocation);
 	        // var userLocation = formatUserLocationObject(autocomplete.getPlace());
@@ -32,16 +32,7 @@ function initialize() {
 			//getWeather(userLocation);
 			//buildCityCards(userLocation);
 			//getWeather(userLocation);
-<<<<<<< HEAD
-			// buildCityCards(userLocation);
-			// getWeather(userLocation);
-			// displayNews(userLocation);
-=======
-			//displayNews(userLocation);
->>>>>>> bf151f3a1d38752322253626260b2e51db3a7acf
 
-        });
-}
 
 function formatUserLocationObject(userLocation){
 	var userLocationObject = {};
