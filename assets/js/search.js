@@ -3,15 +3,36 @@ function initialize() {
         (document.getElementById('autocomplete')),
         { types: ["(cities)"] });
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
-	        var userLocation = formatUserLocationObject(autocomplete.getPlace());
-	        //$(document).on("click", ".btn", console.log(userLocation));
-	        console.log("label",userLocation);
-	        addToFirebase(userLocation);
+        	
+        	var userLocation = formatUserLocationObject(autocomplete.getPlace());
+
+    			$( "#search123" ).on("click", function() {
+			        //alert('test');
+			        //userLocation ;
+			        //$(document).on("click", ".btn", console.log(userLocation));
+			        //console.log("label",userLocation);
+			        addToFirebase(userLocation);
+			  //       buildCityCards(userLocation);
+					// getWeather(userLocation);
+					// displayNews(userLocation);
+			        
+
+    			});
+
+	
+
+			//addToFirebase(userLocation);
+	        // var userLocation = formatUserLocationObject(autocomplete.getPlace());
+
+
+	        // //$(document).on("click", ".btn", console.log(userLocation));
+	        // console.log("label",userLocation);
+	        // addToFirebase(userLocation);
 
 			//getWeather(userLocation);
-			buildCityCards(userLocation);
-			getWeather(userLocation);
-			displayNews(userLocation);
+			//buildCityCards(userLocation);
+			//getWeather(userLocation);
+			//displayNews(userLocation);
 
         });
 }

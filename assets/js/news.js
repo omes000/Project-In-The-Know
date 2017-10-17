@@ -6,7 +6,7 @@ function displayNews(userLocation) {
 	//need to add logic for dealing with US based cities and world cities.
 
 	$.ajax({
-		url: "https://api.cognitive.microsoft.com/bing/v5.0/news/search",
+		url: "https://api.cognitive.microsoft.com/bing/v7.0/news/search",
 		data: {
 			"q": userLocation.cityID,
 			"mkt": "en-US",
@@ -14,7 +14,7 @@ function displayNews(userLocation) {
 			"offset": "0"
 		},
 		beforeSend: function(xhrObj) {
-			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "3e8463042fb349f4a2e84e8cec9e65f1");
+			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "2a91e1b45c85447893865add83612801");
 		},
 		type: "GET",
 	}).done(function(response) {
@@ -85,7 +85,7 @@ function populateNewsInfo (userLocation, news) {
 		var newsDescription = $("#"+userLocation.cityID + '-media-description-' + i).append(news[i].description);
 		var newssubHeading = $("#"+userLocation.cityID + '-media-subheading-' + i).append(news[i].provider[0].name).append(" - " + moment.parseZone(news[i].datePublished).local().fromNow());
 		 //  var newsURLs = NEWS[i].url;
-		 var newsImage = $("#"+userLocation.cityID + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
+		 //var newsImage = $("#"+userLocation.cityID + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
 		}
 	}
 
