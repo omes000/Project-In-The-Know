@@ -9,9 +9,9 @@ function initialize() {
 	        addToFirebase(userLocation);
 
 			//getWeather(userLocation);
-			buildCityCards(userLocation);
-			getWeather(userLocation);
-			displayNews(userLocation);
+			// buildCityCards(userLocation);
+			// getWeather(userLocation);
+			// displayNews(userLocation);
 
         });
 }
