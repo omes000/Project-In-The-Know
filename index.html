@@ -32,7 +32,7 @@
 				<div id="locationField" class = "input-group">
 	     			<input id="autocomplete" placeholder="Enter desired location" onFocus="" type="text" class = "form-control"></input>
 	     			<span class = "input-group-btn">
-	     				<button class = "btn btn-default">
+	     				<button class = "btn btn-default" id ="search123">
 	     					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 	     				</button>
 
@@ -68,7 +68,9 @@
 	<!-- Script to obtain data -->
 	<script> 
 		//var cityname = "Chicago";
-		initialize();
+		$(document).ready(function() {
+			initialize();
+		});
 		//getWeather(cityname);
 	</script>
 

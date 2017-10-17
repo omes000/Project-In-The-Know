@@ -3,15 +3,42 @@ function initialize() {
         (document.getElementById('autocomplete')),
         { types: ["(cities)"] });
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
-	        var userLocation = formatUserLocationObject(autocomplete.getPlace());
-	        //$(document).on("click", ".btn", console.log(userLocation));
-	        console.log("label",userLocation);
-	        addToFirebase(userLocation);
+        	
+        	var userLocation = formatUserLocationObject(autocomplete.getPlace());
+
+    			//$( "#search123" ).on("click", function() {
+			        //alert('test');
+			        //userLocation ;
+			        //$(document).on("click", ".btn", console.log(userLocation));
+			        //console.log("label",userLocation);
+			        addToFirebase(userLocation);
+			  //       buildCityCards(userLocation);
+					// getWeather(userLocation);
+					// displayNews(userLocation);
+			        
+
+    			//});
+
+	
+
+			//addToFirebase(userLocation);
+	        // var userLocation = formatUserLocationObject(autocomplete.getPlace());
+
+
+	        // //$(document).on("click", ".btn", console.log(userLocation));
+	        // console.log("label",userLocation);
+	        // addToFirebase(userLocation);
 
 			//getWeather(userLocation);
+			//buildCityCards(userLocation);
+			//getWeather(userLocation);
+<<<<<<< HEAD
 			// buildCityCards(userLocation);
 			// getWeather(userLocation);
 			// displayNews(userLocation);
+=======
+			//displayNews(userLocation);
+>>>>>>> bf151f3a1d38752322253626260b2e51db3a7acf
 
         });
 }
@@ -61,6 +88,8 @@ function formatUserLocationObject(userLocation){
 
 
 function buildCityCards(userLocation){
+
+	console.log("building cards" , userLocation);
 	var cityCard = $("<div>");
 	cityCard.addClass('row gap-top gap-bottom big-card').attr('id', userLocation.cityID);
 
