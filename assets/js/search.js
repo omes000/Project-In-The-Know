@@ -6,7 +6,7 @@ function initialize() {
         	
         	var userLocation = formatUserLocationObject(autocomplete.getPlace());
 
-    			$( "#search123" ).on("click", function() {
+    			//$( "#search123" ).on("click", function() {
 			        //alert('test');
 			        //userLocation ;
 			        //$(document).on("click", ".btn", console.log(userLocation));
@@ -17,7 +17,7 @@ function initialize() {
 					// displayNews(userLocation);
 			        
 
-    			});
+    			//});
 
 	
 
@@ -82,6 +82,8 @@ function formatUserLocationObject(userLocation){
 
 
 function buildCityCards(userLocation){
+
+	console.log("building cards" , userLocation);
 	var cityCard = $("<div>");
 	cityCard.addClass('row gap-top gap-bottom big-card').attr('id', userLocation.cityID);
 
