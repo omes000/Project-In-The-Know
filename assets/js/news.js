@@ -18,20 +18,9 @@ function displayNews(userLocation) {
 		},
 			type: "GET",
 	}).done(function(response) {
-		console.log(response)
 		var news = response.value;
-		console.log(news)
-	  /*console.log(news[1].name)
-	  console.log(news[1].description)
-	  console.log("date published: " + news[1].datePublished)
-	  console.log("news agency: " + news [1].provider[0].name)
-	  console.log("imageURL: " + news[1].image.thumbnail.contentUrl)
-	  console.log("newsSourceURL: " + news[1].url)*/
-	  console.log(news.length);
-
-	  buildingNewsContainer(userLocation, news);
-	  populateNewsInfo(userLocation, news);
-
+	 	buildingNewsContainer(userLocation, news);
+	  	populateNewsInfo(userLocation, news);
 	});
 }
 
@@ -75,7 +64,6 @@ function buildingNewsContainer(userLocation, news) {
 
 		console.log(userLocation.city);
 		$("#" + userLocation.cityID + '-media').append(eachNews);
-
 	}
 }
 
@@ -84,9 +72,8 @@ function populateNewsInfo (userLocation, news) {
 		var newsName = $("#"+userLocation.cityID + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("href",news[i].url).attr("target","_blank");
 		var newsDescription = $("#"+userLocation.cityID + '-media-description-' + i).append(news[i].description);
 		var newssubHeading = $("#"+userLocation.cityID + '-media-subheading-' + i).append(news[i].provider[0].name).append(" - " + moment.parseZone(news[i].datePublished).local().fromNow());
-		 //  var newsURLs = NEWS[i].url;
 		 //var newsImage = $("#"+userLocation.cityID + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
-		}
 	}
+}
 
 
