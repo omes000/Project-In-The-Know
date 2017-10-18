@@ -11,7 +11,7 @@ function displayNews(userLocation) {
 			"q": userLocation.cityID,
 			"mkt": "en-US",
 			"count": "3",
-			"offset": "0"
+			"offset": "0",
 		},
 		beforeSend: function(xhrObj) {
 			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "3a50fa406cbb40128ac6c801d830fc6a");
@@ -19,7 +19,7 @@ function displayNews(userLocation) {
 			type: "GET",
 	}).done(function(response) {
 		console.log(response)
-		var news = response.value
+		var news = response.value;
 		console.log(news)
 	  /*console.log(news[1].name)
 	  console.log(news[1].description)
@@ -32,55 +32,55 @@ function displayNews(userLocation) {
 	  buildingNewsContainer(userLocation, news);
 	  populateNewsInfo(userLocation, news);
 
-	})
+	});
 }
 
 
 function buildingNewsContainer(userLocation, news) {
-	for (i=0; i<news.length; i++){
-		var eachNews = $("<div>")
-		eachNews.addClass("media")
-		eachNews.attr("id",userLocation.cityID + "-media-" + i)
+	for (i=0; i<news.length; i++) {
+		var eachNews = $("<div>");
+		eachNews.addClass("media");
+		eachNews.attr("id",userLocation.cityID + "-media-" + i);
 
 		var eachNewsImageArea = $("<div>");
-		eachNewsImageArea.addClass("media-left")
-		eachNewsImageArea.attr("id",userLocation.cityID + "-media-image-container-" + i)
-		eachNews.append(eachNewsImageArea)
+		eachNewsImageArea.addClass("media-left");
+		eachNewsImageArea.attr("id",userLocation.cityID + "-media-image-container-" + i);
+		eachNews.append(eachNewsImageArea);
 
 		var eachNewsImage = $("<img>");
-		eachNewsImage.addClass('media-object')
-		eachNewsImage.attr('id', userLocation.cityID + '-media-image-' + i)
-		eachNewsImageArea.append(eachNewsImage)
+		eachNewsImage.addClass('media-object');
+		eachNewsImage.attr('id', userLocation.cityID + '-media-image-' + i);
+		eachNewsImageArea.append(eachNewsImage);
 
 		var eachNewsBody = $("<div>");
-		eachNewsBody.addClass("media-body")
-		eachNewsBody.attr("id",userLocation.cityID + "-media-body-" + i)
-		eachNews.append(eachNewsBody)
+		eachNewsBody.addClass("media-body");
+		eachNewsBody.attr("id",userLocation.cityID + "-media-body-" + i);
+		eachNews.append(eachNewsBody);
 
 		var eachNewsHeading = $("<a>");
-		eachNewsHeading.addClass("media-heading")
-		eachNewsHeading.attr("id",userLocation.cityID + "-media-heading-" + i)
-		eachNewsBody.append(eachNewsHeading)
+		eachNewsHeading.addClass("media-heading");
+		eachNewsHeading.attr("id",userLocation.cityID + "-media-heading-" + i);
+		eachNewsBody.append(eachNewsHeading);
 
 		var eachNewsSubHeading = $("<div>");
-		eachNewsSubHeading.addClass("media-subheading")
-		eachNewsSubHeading.attr("id",userLocation.cityID + "-media-subheading-" + i)
-		eachNewsBody.append(eachNewsSubHeading)
+		eachNewsSubHeading.addClass("media-subheading");
+		eachNewsSubHeading.attr("id",userLocation.cityID + "-media-subheading-" + i);
+		eachNewsBody.append(eachNewsSubHeading);
 
 		var eachNewsDescription = $("<div>");
-		eachNewsDescription.addClass("media-description")
-		eachNewsDescription.attr("id",userLocation.cityID + "-media-description-" + i)
-		eachNewsBody.append(eachNewsDescription)
+		eachNewsDescription.addClass("media-description");
+		eachNewsDescription.attr("id",userLocation.cityID + "-media-description-" + i);
+		eachNewsBody.append(eachNewsDescription);
 
 
 		console.log(userLocation.city);
-		$("#" + userLocation.cityID + '-media').append(eachNews)
+		$("#" + userLocation.cityID + '-media').append(eachNews);
 
 	}
 }
 
 function populateNewsInfo (userLocation, news) {
-	for (var i=0; i<news.length; i++){
+	for (var i=0; i<news.length; i++) {
 		var newsName = $("#"+userLocation.cityID + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("href",news[i].url).attr("target","_blank");
 		var newsDescription = $("#"+userLocation.cityID + '-media-description-' + i).append(news[i].description);
 		var newssubHeading = $("#"+userLocation.cityID + '-media-subheading-' + i).append(news[i].provider[0].name).append(" - " + moment.parseZone(news[i].datePublished).local().fromNow());
