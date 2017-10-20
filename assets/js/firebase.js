@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 console.log("This is Database", database);
 
+
 //Button for adding data
 
 // $("#btn btn-default").on("click", function(event) {
@@ -25,6 +26,7 @@ console.log("This is Database", database);
 function addToFirebase(newPlace){
 	console.log("Data to Save:");
 	database.ref().push(newPlace);
+	
 };
   
 
@@ -40,5 +42,12 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 	//var newPlace = childSnapshot.val().place;
 	//console.log (newPlace);
-
 });
+
+	
+	//buildCityCards(childSnapshot.val());
+	//getWeather(childSnapshot.val());
+	//displayNews(childSnapshot.val());
+
+
+
