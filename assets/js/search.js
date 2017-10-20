@@ -1,46 +1,22 @@
 function initialize() {
-    autocomplete = new google.maps.places.Autocomplete(
-        (document.getElementById('autocomplete')),
-        { types: ["(cities)"] });
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        	
-        	var userLocation = formatUserLocationObject(autocomplete.getPlace());
+	autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{ types: ["(cities)"] });
+	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+		
+		var userLocation = formatUserLocationObject(autocomplete.getPlace());
 
-    			//$( "#search123" ).on("click", function() {
-			        //alert('test');
-			        //userLocation ;
-			        //$(document).on("click", ".btn", console.log(userLocation));
-			        //console.log("label",userLocation);
-			        addToFirebase(userLocation);
-			  //       buildCityCards(userLocation);
-					// getWeather(userLocation);
-					// displayNews(userLocation);
-			        
+		addToFirebase(userLocation);
 
-    			});
-
-		}
-
-			//addToFirebase(userLocation);
-	        // var userLocation = formatUserLocationObject(autocomplete.getPlace());
-
-
-	        // //$(document).on("click", ".btn", console.log(userLocation));
-	        // console.log("label",userLocation);
-	        // addToFirebase(userLocation);
-
-			//getWeather(userLocation);
-			//buildCityCards(userLocation);
-			//getWeather(userLocation);
-
+		$("#autocomplete").val('');
+	});
+}
 
 function formatUserLocationObject(userLocation){
 	var userLocationObject = {};
 
 	var lengthAddressComponents = userLocation.address_components.length;
 	var cityName = userLocation.address_components[0].long_name;
-	var cityNameforIDs = cityName.replace(" ", "");
-
+	var cityNameforIDs = "";
+	
 	var countryNameHolder = userLocation.address_components[lengthAddressComponents - 1].long_name;
 	var countryName;
 
@@ -56,10 +32,11 @@ function formatUserLocationObject(userLocation){
 	if (isNaN(parseInt(countryNameHolder))){
 		countryName = countryNameHolder;
 		stateName = stateNameHolder;
-
+		cityNameforIDs = cityName.replace(" ", "")+ stateName.replace(" ", "");
 	} else{
 		countryName = userLocation.address_components[lengthAddressComponents - 2].long_name;
-		stateName = userLocation.address_components[lengthAddressComponents - 3].long_name
+		stateName = userLocation.address_components[lengthAddressComponents - 3].long_name;
+		cityNameforIDs = cityName.replace(" ", "")+ stateName.replace(" ", "");
 	}
 
 	userLocationObject = {
@@ -71,36 +48,34 @@ function formatUserLocationObject(userLocation){
 		long: long.toFixed(2),
 		full: fullAddress
 	}
-
-
 	return userLocationObject;
-	
 }
-
 
 function buildCityCards(userLocation){
 
-	console.log("building cards" , userLocation);
-	var cityCard = $("<div>");
-	cityCard.addClass('row gap-top gap-bottom big-card').attr('id', userLocation.cityID);
+	var cityCardContainer = $("<div>");
+	cityCardContainer.addClass('row card-container big-card').attr('id', userLocation.cityID + "-card-container");
 
 	var infoContainer = $("<div>");
-	infoContainer.addClass('info col-lg-12 padding-top');
+	infoContainer.addClass('card info col-lg-12').attr('id', userLocation.cityID + '-name-display').html("<div class = 'row'><div class = 'col-lg-12 title'>"+ userLocation.city.toUpperCase() + "</div><div class = 'col-lg-12 subtitle-name'>" + userLocation.country.toUpperCase()+"</div></div>");
 
-	var cityNameDisplay = $("<div>");
-	cityNameDisplay.addClass('col-lg-6 city').html("<h2 class = 'title'>"+userLocation.city + ", " + userLocation.country+"</h2>");
+	var aboutCityContainer = $("<div>");
+	aboutCityContainer.addClass('col-lg-12 card about-city').attr('id', userLocation.cityID + '-about-city-container');
 
-	var weatherDisplay = $("<div>");
-	weatherDisplay.addClass("col-lg-6 weather").attr('id', userLocation.cityID+'-weather-area');
+	var aboutContainerRow = $("<div>").addClass('row zero-margin');
 
-	infoContainer.append(cityNameDisplay, weatherDisplay);
+	var newsContainer = $("<div>").addClass('news-container col-lg-8').attr('id', userLocation.cityID + '-news-container');
+	var timeWeatherContainer = $("<div>").addClass('time-weather-container col-lg-4').attr('id', userLocation.cityID + '-time-weather-container');
 
-	var newsContainer = $("<div>");
-	newsContainer.addClass('news col-lg-12').attr('id', userLocation.cityID + '-media');
+	var timeWidgetContainer = $("<div>").addClass('card-container time-widget-container').attr('id', userLocation.cityID+'-time-container');
+	var weatherWidgetContainer = $("<div>").addClass('card-container weather-widget-container').attr('id', userLocation.cityID+'-weather-container');
 
-	cityCard.append(infoContainer, newsContainer);
+	timeWeatherContainer.append(timeWidgetContainer, weatherWidgetContainer);
+	aboutContainerRow.append(newsContainer, timeWeatherContainer);
+	aboutCityContainer.append(aboutContainerRow);
+	cityCardContainer.append(infoContainer, aboutCityContainer);
 
-	$('.container').append(cityCard);
-
+	$('.container').append(cityCardContainer);
 }
 
+$('.remove-cards').on('click', '.remove', clearAllCards);

@@ -10,40 +10,48 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/additional_styling.css">
-	<link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/additional_styling.css">
+	<link rel="stylesheet" href="assets/css/weather-icons.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400|Work+Sans:200,400,800" rel="stylesheet">
 </head>
 
 <body>
-	<div class = "container">
+	<div class = "container" id = "main-container">
 		
 		<!-- Div Collection holds logo and Site Introduction -->
-		<div class = "row gap-top">
-			<div class = "col-lg-6">
-				<div class = "col-lg-4">
-					<img src = "assets/images/logo3.png" width = "100px" class = "img-responsive">
+		<div class = 'vert-align height' id = "logo-container">
+			<div class = 'row'>
+				<div class = "row vert-align">
+						<div class = "col-lg-4">
+							<img src = "assets/images/logo3.png" width = "200px" class = "img-responsive pull-right">
+						</div>
+						<div class = "col-lg-7">
+							<p class = 'site-header'>The site to search for news and weather of places you want to go, so you are in the know.</p>
+						</div>
+						<div class = "col-lg-1">
+							<p>  </p>
+						</div>
 				</div>
-				<div class = "col-lg-8">
-					<p>The site to search for news and weather of places you want to go, so you are in the know.</p>
+
+					<!-- Div holds Search -->
+				<div class = "row text-center" id = "search-area">
+					<div class = "col-lg-8 col-lg-offset-2">
+						<div id="locationField" class = "input-group">
+			     			<input id="autocomplete" placeholder="Search for a city" type="text" class = "form-control"></input>
+			     		</div>
+			     	</div>
 				</div>
 			</div>
-
-			<!-- Div holds Search -->
-			<div class = "col-lg-6">
-				<div id="locationField" class = "input-group">
-	     			<input id="autocomplete" placeholder="Enter desired location" onFocus="" type="text" class = "form-control"></input>
-	     			<span class = "input-group-btn">
-	     				<button class = "btn btn-default" id ="search123">
-	     					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-	     				</button>
-
-	     			</span>
-	     		</div>
-	     	</div>
 		</div>
 
 		<!-- Div Collection for City results to hold: city card, relevant news results and weather widget-->
 		<div class = "row">
-			<div class="col-lg-12" style="height:25px;"></div>
+			<div class = "col-lg-1 pull-right remove-cards not-visible">
+				<button type = "button" class = "btn btn-default btn-lg tooltips remove">
+					<span class = "tooltiptexts">Clear All Cards</span>
+  					<span class = "glyphicon glyphicon-remove remove-symbol" aria-hidden = "true"></span>
+				</button>
+			</div>
 		</div>
 	</div>
 
@@ -53,13 +61,14 @@
 
 	<!-- JS files: search, news, moment, minigrid, weatherAPI, weatherWidget, jQuery-->
 	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="assets/js/firebase.js"></script>
 	<script src="assets/js/search.js"></script>
 	<script src="assets/js/news.js"></script>
 	<script src="assets/js/moment.js"></script>
 	<script src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
 	<script src="assets/js/weatherAPI.js"></script>
+	<script src="assets/js/weatherAPIicons.js"></script>
 	<script src="assets/js/weatherWidget.js"></script>
-	<script src="assets/js/firebase.js"></script>
 
 	<!-- Google Places API, -->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCvmn0dYr1YDjJzoCigkuMw7gUkQ_evKKw"></script>

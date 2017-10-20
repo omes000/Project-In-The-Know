@@ -13,46 +13,41 @@ function getWeather(userLocation){
 		method: "GET"
 	}).done(function(response){
 		weather = response;
-		console.log(response)
 		// Get array of forecast: temp(f),text,icon localtime.  Then output for each day for max/min temp, condition, icon and format of date.
-		forecast = [{
-			currentTemp: weather.current.temp_f,
-			currentCondition: weather.current.condition.text,
-			currentConditionIcon: weather.current.condition.icon,
-			currentTime: moment(weather.location.localtime).format("hh:mm a")
-		},
-		{
-			dayOneMaxTemp:weather.forecast.forecastday[1].day.maxtemp_f,
-			dayOneMinTemp: weather.forecast.forecastday[1].day.mintemp_f,
-			dayOneCondition: weather.forecast.forecastday[1].day.condition.text,
-			dayOneConditionIcon: weather.forecast.forecastday[1].day.condition.icon,
-			dateOne: getDayfromNum(new Date(weather.forecast.forecastday[1].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-		},
-		{
-			dayTwoMaxTemp:weather.forecast.forecastday[2].day.maxtemp_f,
-			dayTwoMinTemp: weather.forecast.forecastday[2].day.mintemp_f,
-			dayTwoCondition: weather.forecast.forecastday[2].day.condition.text,
-			dayTwoConditionIcon: weather.forecast.forecastday[2].day.condition.icon,
-			dateTwo: getDayfromNum(new Date(weather.forecast.forecastday[2].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-		},
-		{
-			dayThreeMaxTemp:weather.forecast.forecastday[3].day.maxtemp_f,
-			dayThreeMinTemp: weather.forecast.forecastday[3].day.mintemp_f,
-			dayThreeCondition: weather.forecast.forecastday[3].day.condition.text,
-			dayThreeConditionIcon: weather.forecast.forecastday[3].day.condition.icon,
-			dateThree: getDayfromNum(new Date(weather.forecast.forecastday[3].date.replace(/-/, '/').replace(/-/,'/')).getDay())
-		},
-		{
-			dayFourMaxTemp:weather.forecast.forecastday[4].day.maxtemp_f,
-			dayFourMinTemp: weather.forecast.forecastday[4].day.mintemp_f,
-			dayFourCondition: weather.forecast.forecastday[4].day.condition.text,
-			dayFourConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
-			dateFour: getDayfromNum(new Date(weather.forecast.forecastday[4].date.replace(/-/, '/').replace(/-/,'/')).getDay())
+		var forecast = [];
+		for (var i = 0; i<5; i++){
+			var tempForecast = {};
+			if (i === 0){
+				tempForecast = {
+					currentTemp: weather.current.temp_f,
+					currentHumidity: weather.current.humidity,
+					currentWindSpeed: weather.current.wind_mph.toFixed(0),
+					currentWindDirection: weather.current.wind_dir,
+					currentCondition: weather.current.condition.text,
+					currentConditionIcon: weather.current.condition.icon,
+					currentConditionCode: weather.current.condition.code,
+					currentConditionNewIcon: "",
+					currentTime: moment(weather.location.localtime).format("hh:mm"),
+					currentAMPM: moment(weather.location.localtime).format("A"),
+					currentDate: moment(weather.location.localtime).format("ddd MMM. DD")
+				};
+				forecast.push(tempForecast); 
+			}
+			else{
+				tempForecast = {
+					maxTemp:weather.forecast.forecastday[i].day.maxtemp_f,
+					minTemp: weather.forecast.forecastday[i].day.mintemp_f,
+					condition: weather.forecast.forecastday[i].day.condition.text,
+					conditionIcon: weather.forecast.forecastday[i].day.condition.icon,
+					conditionCode: weather.forecast.forecastday[i].day.condition.code,
+					conditionNewIcon: "",
+					date: getDayfromNum(new Date(weather.forecast.forecastday[i].date.replace(/-/, '/').replace(/-/,'/')).getDay())
+				};
+				forecast.push(tempForecast);
+			}
 		}
-		];
-
 		// Weather Widget
 		buildWeatherWidget(userLocation, forecast);
-		});
+	});
 }
 
