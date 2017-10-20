@@ -22,20 +22,25 @@ function addToFirebase(newPlace){
 // Create Firebase event for adding data to the database 
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
+	/*when there is an element in the database, the page changes from a Google search style landing page to one where the logo and search bar are at the top*/
 	$("#logo-container").removeClass('vert-align height');
 	
+	//Makes the button to clear all cards/data visible
 	$(".remove-cards").addClass('visible');
 
+	//Use the firebase data to generate the city cards. 
 	buildCityCards(childSnapshot.val());
 	displayNews(childSnapshot.val());
 	getWeather(childSnapshot.val());
 });
 
+//clears all data from the firebase database, calls on removeCardDivs function
 function clearAllCards() {
     database.ref().remove();
     removeCardDivs();
 }
 
+/*removes all city cards from the page, makes the page look like a Google Search landing page again, and hides the button to clear all cards/data*/
 function removeCardDivs() {
     $(".big-card").remove();
     $("#logo-container").addClass('vert-align height');

@@ -17,6 +17,8 @@ function getWeather(userLocation){
 		var forecast = [];
 		for (var i = 0; i<5; i++){
 			var tempForecast = {};
+
+			/*The current temperature could have been stored separately, since the data is different. However, the desire was to only pass a single object, hence why this method of storing the data was chosen.*/
 			if (i === 0){
 				tempForecast = {
 					currentTemp: weather.current.temp_f,
@@ -46,7 +48,8 @@ function getWeather(userLocation){
 				forecast.push(tempForecast);
 			}
 		}
-		// Weather Widget
+
+		// Builds the Weather Widget
 		buildWeatherWidget(userLocation, forecast);
 	});
 }

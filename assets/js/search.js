@@ -4,18 +4,22 @@ function initialize() {
 		
 		var userLocation = formatUserLocationObject(autocomplete.getPlace());
 
+		//adds the userLocation object to the Firebase database; the rest of the App pulls the data from firebase.
 		addToFirebase(userLocation);
 
 		$("#autocomplete").val('');
 	});
 }
 
+/*The formatUserLocationObject function takes in as an argument the response object from the Google Places API and creates an object from the desired portions of the response. The information from this newly created object provides the query terms needed to run the Bing News API and the Weather API. It also creates the unique IDs for the City Cards, allowing new cards with the same city name to be created.*/
+
 function formatUserLocationObject(userLocation){
 	var userLocationObject = {};
 
 	var lengthAddressComponents = userLocation.address_components.length;
 	var cityName = userLocation.address_components[0].long_name;
-	var cityNameforIDs = "";
+	var cityNameforIDs;
+	var searchTerm = cityName.replace(" ", "");
 	
 	var countryNameHolder = userLocation.address_components[lengthAddressComponents - 1].long_name;
 	var countryName;
@@ -46,11 +50,13 @@ function formatUserLocationObject(userLocation){
 		country: countryName,
 		lat: lat.toFixed(2),
 		long: long.toFixed(2),
-		full: fullAddress
+		full: fullAddress,
+		search: searchTerm
 	}
 	return userLocationObject;
 }
 
+/*This function creates the main skeleton for the city cards, including the main outside container, the title container, the about the city container (which contains the news, weather and time containers)*/
 function buildCityCards(userLocation){
 
 	var cityCardContainer = $("<div>");
@@ -64,8 +70,8 @@ function buildCityCards(userLocation){
 
 	var aboutContainerRow = $("<div>").addClass('row zero-margin');
 
-	var newsContainer = $("<div>").addClass('news-container col-lg-8').attr('id', userLocation.cityID + '-news-container');
-	var timeWeatherContainer = $("<div>").addClass('time-weather-container col-lg-4').attr('id', userLocation.cityID + '-time-weather-container');
+	var newsContainer = $("<div>").addClass('news-container col-xs-12 col-md-8 col-lg-8').attr('id', userLocation.cityID + '-news-container');
+	var timeWeatherContainer = $("<div>").addClass('time-weather-container col-xs-12 col-md-4 col-lg-4').attr('id', userLocation.cityID + '-time-weather-container');
 
 	var timeWidgetContainer = $("<div>").addClass('card-container time-widget-container').attr('id', userLocation.cityID+'-time-container');
 	var weatherWidgetContainer = $("<div>").addClass('card-container weather-widget-container').attr('id', userLocation.cityID+'-weather-container');
@@ -78,4 +84,5 @@ function buildCityCards(userLocation){
 	$('.container').append(cityCardContainer);
 }
 
+//Calls the clear all function that removes the all of the userLocation data from firebase and removes all of the City cards on the app
 $('.remove-cards').on('click', '.remove', clearAllCards);

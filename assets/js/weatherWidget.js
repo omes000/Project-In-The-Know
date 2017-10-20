@@ -1,9 +1,6 @@
 /* Weather Widget
-Create all container divs for the Weather Widget. The Weather Widget has 3 main containers:
-	1. The overall weather Widget container that contains the next two items below:
-	2. The header container that contains the current weather information
-	3. The forecast container that contains the weather information for the next 4 days*/
 
+/*The following function builds the container skeletons for the time and weather widgets.*/
 function buildTimeWeatherWidgetContainers(userLocation, forecast){
 	var weatherWidgetContainer = $("#"+userLocation.cityID+'-weather-container');
 	var weatherWidget = $("<div>");
@@ -11,34 +8,31 @@ function buildTimeWeatherWidgetContainers(userLocation, forecast){
 	var weatherWidgetCurrent = $("<div>");
 	var weatherWidgetForecast = $("<div>");
 
+	weatherWidget.addClass('card').attr('id', userLocation.cityID+'-weather-card');
+	weatherWidgetHeader.addClass('row weather-card-header').attr('id', userLocation.cityID +'-weather-card-header');
+	weatherWidgetCurrent.addClass('row weather-card-current').attr('id', userLocation.cityID + '-weather-card-current');
+	weatherWidgetForecast.addClass('weather-card-forecast').attr('id', userLocation.cityID +'-weather-card-forecast');
+
+	weatherWidget.append(weatherWidgetHeader, weatherWidgetCurrent,weatherWidgetForecast);
+	weatherWidgetContainer.append(weatherWidget);
+
 	var timeWidgetContainer = $("#"+userLocation.cityID+'-time-container');
 	var timeWidget = $("<div>");
 	var timeWidgetHeader = $("<div>");
 	var timeWidgetCityDateRow = $("<div>");
 	var timeWidgetTime = $("<div>");
 
-	weatherWidget.addClass('card').attr('id', userLocation.cityID+'-weather-card');
-	weatherWidgetHeader.addClass('row weather-card-header').attr('id', userLocation.cityID +'-weather-card-header');
-	weatherWidgetCurrent.addClass('row weather-card-current').attr('id', userLocation.cityID + '-weather-card-current');
-	weatherWidgetForecast.addClass('weather-card-forecast').attr('id', userLocation.cityID +'-weather-card-forecast');
-	weatherWidget.append(weatherWidgetHeader, weatherWidgetCurrent,weatherWidgetForecast);
-	weatherWidgetContainer.append(weatherWidget);
-
 	timeWidget.addClass('card').attr('id', userLocation.cityID+'-time-card');
 	timeWidgetHeader.addClass('row time-card-header');
-	timeWidgetHeader.append("<div class = 'col-sm-5 subtitle-card-main'>" + userLocation.city + "</div>");
-	timeWidgetHeader.append("<div class = 'col-sm-6 col-sm-offset-1 pull-right subtitle-card-minor zero-margin date'>" +forecast[0].currentDate.toUpperCase() + "</div>");
-	timeWidgetTime.addClass('row time-card-time').append("<div class = 'col-sm-12 showy-text zero-margin current-time'>" + forecast[0].currentTime + "&nbsp;<span class = 'am-pm'>"+forecast[0].currentAMPM+"</span></div>");
-	//timeWidgetTime.append("");
+	timeWidgetHeader.append("<div class = 'col-xs-5 subtitle-card-main'>" + userLocation.city + "</div>");
+	timeWidgetHeader.append("<div class = 'col-xs-6 col-xs-offset-1 pull-right subtitle-card-minor zero-margin date'>" +forecast[0].currentDate.toUpperCase() + "</div>");
+	timeWidgetTime.addClass('row time-card-time').append("<div class = 'col-xs-12 showy-text zero-margin current-time'>" + forecast[0].currentTime + "&nbsp;<span class = 'am-pm'>"+forecast[0].currentAMPM+"</span></div>");
+
 	timeWidget.append(timeWidgetHeader, timeWidgetTime);
 	timeWidgetContainer.append(timeWidget);
-
-
-
-	// $('#'+userLocation.cityID+'-time-weather-container').append("<div class = 'time-widget-container'><div class = 'row time-city-date'><div class ='col-sm-5 subtitle-time'>"+userLocation.city+"</div><div class = 'col-sm-6 col-sm-offset-1 pull-right subtitle-date'>" + forecast[0].currentDate.toUpperCase()+"</div></div><div class = 'row time-time'><div class = 'col-sm-12 currTime'>"+ forecast[0].currentTime+" <span class = 'am-pm'>"+forecast[0].currentAMPM+"</span></div></div></div>");
-	//$("#"+userLocation.cityID+'-time-weather-container').append(timeWidget, weatherWidget);
 }
 
+//Functions init and update mounts the small forecast cards using minigrid.js. 
 var grid;
 function init(userLocation){
 	grid = new Minigrid({
@@ -53,8 +47,9 @@ function update() {
 	grid.mount();
 }
 
+//Creates the skeleton for the mini forecast cards. 
 function buildWeatherWidgetMiniCards(userLocation){
-	for (var i = 1; i<5; i++){
+	for (var i = 1; i < 5; i++){
 		var newDiv = $("<div>");
 		newDiv.addClass("weather-forecast-minicards").attr('grid-id', userLocation.cityID+'-weather-forecast-minicards');
 		newDiv.attr('id', userLocation.cityID+'-weather-forecast-minicards'+i);
@@ -62,6 +57,7 @@ function buildWeatherWidgetMiniCards(userLocation){
 	}
 }
 
+/*Used to get the abbreviation of the day of the week from the JavaScript getDay() function, which returns an integer corresponding to the day of the week.*/
 function getDayfromNum(num){
 	switch (num) {
 	    case 0:
@@ -88,6 +84,7 @@ function getDayfromNum(num){
 	return day;
 }
 
+//Gets the icons needed for the weather widget based on the mapping done in weatherAPIicons.js.
 function getWeatherIcons(forecast){
 	var icon;
 	var forecastCode;
@@ -117,17 +114,18 @@ function getWeatherIcons(forecast){
 	}
 }
 
+//Populates the weather container skeleton with the weather data
 function populateWeatherWidget(userLocation, forecast){
 
-	$('#' + userLocation.cityID + '-weather-card-header').append("<div class = 'col-lg-5 subtitle-card-main city-conditions'><p class ='zero-margin'>"+userLocation.city+"</p><p class = 'current-condition zero-margin'>" +forecast[0].currentCondition+"</p></div>");
+	$('#' + userLocation.cityID + '-weather-card-header').append("<div class = 'col-xs-5 subtitle-card-main city-conditions'><p class ='zero-margin'>"+userLocation.city+"</p><p class = 'current-condition zero-margin'>" +forecast[0].currentCondition+"</p></div>");
 
-	$('#' + userLocation.cityID + '-weather-card-header').append("<div class = 'col-lg-4 col-lg-offset-3 subtitle-card-minor'><p class = 'wind'>"+forecast[0].currentWindDirection+ " " + forecast[0].currentWindSpeed + " mph </p><p class = 'humidity'> Humidity " + forecast[0].currentHumidity + "%</p></div>");
+	$('#' + userLocation.cityID + '-weather-card-header').append("<div class = 'col-xs-4 col-xs-offset-3 subtitle-card-minor'><p class = 'wind'>"+forecast[0].currentWindDirection+ " " + forecast[0].currentWindSpeed + " mph </p><p class = 'humidity'> Humidity " + forecast[0].currentHumidity + "%</p></div>");
 
 	for (var i = 0; i < forecast.length; i++){
 		if (i===0){
-			$('#'+userLocation.cityID+'-weather-card-current').append("<div class = 'col-lg-5 showy-text zero-margin weather-temp'><i class ='wi "+forecast[0].currentConditionNewIcon+"' id = 'currIcon'></i></div>");
+			$('#'+userLocation.cityID+'-weather-card-current').append("<div class = 'col-xs-5 showy-text zero-margin weather-temp'><i class ='wi "+forecast[0].currentConditionNewIcon+"' id = 'currIcon'></i></div>");
 
-			$('#'+userLocation.cityID+'-weather-card-current').append("<div class='col-lg-6 col-lg-offset-1 showy-text weather-temp align-right'>"+forecast[0].currentTemp.toFixed(0)+"&#176; </div></div>");
+			$('#'+userLocation.cityID+'-weather-card-current').append("<div class='col-xs-6 col-xs-offset-1 showy-text weather-temp align-right'>"+forecast[0].currentTemp.toFixed(0)+"&#176; </div></div>");
 		}
 		else{
 			$("#"+userLocation.cityID+'-weather-forecast-minicards'+i).html("<i class ='wi "+forecast[i].conditionNewIcon+" grid-icon col-xs-12'>");

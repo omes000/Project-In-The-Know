@@ -40,14 +40,6 @@ html, body {
 	margin: 0px;
 }
 
-.subtitle-name{
-	font-family: 'Work Sans', sans-serif;
-	margin:0px;
-	font-size: 2.15em;
-	text-align: center;
-	font-weight: 200;
-}
-
 .time-card-header{
 	margin:0px;
 	padding-bottom: 30px;
@@ -58,20 +50,18 @@ html, body {
 	margin: 0px;
 }
 
-.subtitle-weather{
-	font-family: 'Roboto', sans-serif;
+.subtitle-name{
+	font-family: 'Work Sans', sans-serif;
 	margin:0px;
-	color: #4B5D6A;
-	xtext-align: center;
-	font-size: 1.5em;
-	font-weight: bold;
+	font-size: 2.15em;
+	text-align: center;
+	font-weight: 200;
 }
 
 .subtitle-card-main{
 	margin:0px;
 	color: #4B5D6A;
 	padding:0px;
-	xtext-align: center;
 	font-size: 1.5em;
 	font-weight: bold;
 }
@@ -82,16 +72,16 @@ html, body {
 	font-weight: bold;
 }
 
-.zero-margin{
-	margin:0px;
-}
-
 .subtitle-card-minor{
 	font-family: 'Roboto', sans-serif;
 	color: #B9C0CA;
 	padding:0px 0px 0px 0px;
 	text-align: right;
 	font-size: 1em;
+}
+
+.zero-margin{
+	margin:0px;
 }
 
 .date{
@@ -108,17 +98,13 @@ html, body {
 	margin:0px;
 	text-align: left;
 }
+
 .city-conditions{
 	line-height: 103%;
 }
 
 .current-condition{
 	font-size: 0.7em;
-
-}
-
-h1{
-	font-size: 2.7em;
 }
 
 .card-container{
@@ -129,22 +115,18 @@ h1{
 	padding: 30px;
 }
 
-.news-container{
-}
-
 .about-city{
 	background-color: #f4f5f6;
-	xpadding-top: 30px;
 	min-height: 200px;
 	margin: 0px;
 }
-
 
 .news-border{
 	border-bottom: 1px solid #D5DBE0;
 	width: 100%;
 	padding: 15px 0px 0px 0px;
 }
+
 .news-card{
 	background-color: #fff;
 	border-radius: 3px;
@@ -190,10 +172,6 @@ h1{
 	margin: 10px 0 10px 0;
 }
 
-.currWeath > .wi {
-	color:white;
-}
-
 .grid-temp {
 	color: #B8BCC3;
 	padding:0;
@@ -203,24 +181,11 @@ h1{
 	color: #B8BCC3;
 }
 
-
 .weather-card-header {
 	padding-bottom: 30px;
-
 	margin:0px;
-	
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
-}
-
-.header-`{
-	margin:0px;
-	
-}
-
-.current-forecast{
-	height: 100%;
-	width: 100%;
 }
 
 .weather-card-current {
@@ -229,7 +194,6 @@ h1{
 	line-height: 500%;
 }
 
-
 .site-header{
 	font-size: 1.5em;
 }
@@ -237,14 +201,6 @@ h1{
 .media-heading{
 	font-weight: bold;
 	color: black;
-}
-
-.topPadding{
-	padding: 15px 0px 0px 0px;
-}
-
-.bottomPadding{
-	padding: 0px 0px 15px 0px;
 }
 
 .media {
@@ -270,7 +226,6 @@ h1{
 	color: #cccbcb;
 }
 
-/* mouse over link */
 .media-body a:hover {
 	text-decoration: underline;
 }
@@ -419,4 +374,64 @@ h1{
 
 .news-container{
 	padding-left: 0px;
+}
+
+@media only screen and (max-width : 1200px) {
+
+	.current-time{
+		font-size: 3em;
+	}
+
+	.weather-temp{
+		font-size: 4em;
+	}
+
+	.subtitle-card-main{
+	
+		font-size: 1.3em;
+
+	}
+
+	.subtitle-card-minor{
+
+		font-size: 0.9em;
+	}
+
+	.grid-icon{
+		font-size: 1.7em;
+		margin: 10px 0 10px 0;
+		text-align: center;
+		padding: 0px;
+	}
+
+	.grid-day {
+		font-size: 1em;
+		text-align: center;
+		padding:0px;
+
+	}
+	.grid-temp{
+		font-size: .95em;
+		text-align: center;
+		padding:0px;
+	}
+}
+
+@media only screen and (max-width : 992px) {
+	.time-weather-container{
+		padding-left: 0px;
+		margin-top: 30px;
+	}
+	
+	.news-container{
+		padding-right: 0px;
+	}
+
+	.current-time{
+		font-size: 4em;
+	}
+}
+
+.site-header{
+	font-size: 1.5em;
 }
