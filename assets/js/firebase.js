@@ -9,36 +9,35 @@ var config = {
 	projectId: "in-the-know-41648",
 	storageBucket: "in-the-know-41648.appspot.com",
 	messagingSenderId: "820885397072"
-  };
+};
 
 firebase.initializeApp(config);
-
 var database = firebase.database();
-console.log("This is Database", database);
-
-//Button for adding data
-
-// $("#btn btn-default").on("click", function(event) {
-// event.preventDefault();
 
 // Function that finds data to save   
 function addToFirebase(newPlace){
-	console.log("Data to Save:");
 	database.ref().push(newPlace);
-};
-  
+}
 
 // Create Firebase event for adding data to the database 
-
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
-	console.log("New thing added", childSnapshot.val());
+	$("#logo-container").removeClass('vert-align height');
+	
+	$(".remove-cards").addClass('visible');
 
 	buildCityCards(childSnapshot.val());
-	getWeather(childSnapshot.val());
 	displayNews(childSnapshot.val());
-
-	//var newPlace = childSnapshot.val().place;
-	//console.log (newPlace);
-
+	getWeather(childSnapshot.val());
 });
+
+function clearAllCards() {
+    database.ref().remove();
+    removeCardDivs();
+}
+
+function removeCardDivs() {
+    $(".big-card").remove();
+    $("#logo-container").addClass('vert-align height');
+    $(".remove-cards").removeClass('visible').addClass('not-visible');
+}

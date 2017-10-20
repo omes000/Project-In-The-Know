@@ -3,8 +3,6 @@ Documentation:  https://docs.microsoft.com/en-us/azure/cognitive-services/bing-n
 
 function displayNews(userLocation) {
 
-	//need to add logic for dealing with US based cities and world cities.
-
 	$.ajax({
 		url: "https://api.cognitive.microsoft.com/bing/v7.0/news/search",
 		data: {
@@ -18,75 +16,69 @@ function displayNews(userLocation) {
 		},
 		type: "GET",
 	}).done(function(response) {
-		console.log(response)
 		var news = response.value
-		console.log(news)
-	  /*console.log(news[1].name)
-	  console.log(news[1].description)
-	  console.log("date published: " + news[1].datePublished)
-	  console.log("news agency: " + news [1].provider[0].name)
-	  console.log("imageURL: " + news[1].image.thumbnail.contentUrl)
-	  console.log("newsSourceURL: " + news[1].url)*/
-	  console.log(news.length);
-
-	  buildingNewsContainer(userLocation, news);
-	  populateNewsInfo(userLocation, news);
-
+		buildingNewsContainer(userLocation, news);
+		populateNewsInfo(userLocation, news);
 	})
 }
 
-
 function buildingNewsContainer(userLocation, news) {
-	for (i=0; i<news.length; i++){
-		var eachNews = $("<div>")
-		eachNews.addClass("media")
-		eachNews.attr("id",userLocation.cityID + "-media-" + i)
+	var newsCard = $("<div>");
+	newsCard.addClass("card news-card").attr("id", userLocation.cityID + "-news-card");
+	newsCard.append("<div class = 'row subtitle-card-main'>" + userLocation.city + " Stories</div>");
+
+	for (i = 0; i < news.length; i++){
+		var eachNews = $("<div>");
+		eachNews.addClass("media").attr("id", userLocation.cityID + "-media-" + i);
 
 		var eachNewsImageArea = $("<div>");
-		eachNewsImageArea.addClass("media-left")
-		eachNewsImageArea.attr("id",userLocation.cityID + "-media-image-container-" + i)
-		eachNews.append(eachNewsImageArea)
+		eachNewsImageArea.addClass("media-left").attr("id" ,userLocation.cityID + "-media-image-container-" + i);
 
 		var eachNewsImage = $("<img>");
-		eachNewsImage.addClass('media-object')
-		eachNewsImage.attr('id', userLocation.cityID + '-media-image-' + i)
-		eachNewsImageArea.append(eachNewsImage)
+		eachNewsImage.addClass('media-object').attr('id', userLocation.cityID + '-media-image-' + i);
+		eachNewsImageArea.append(eachNewsImage);
 
 		var eachNewsBody = $("<div>");
-		eachNewsBody.addClass("media-body")
-		eachNewsBody.attr("id",userLocation.cityID + "-media-body-" + i)
-		eachNews.append(eachNewsBody)
+		eachNewsBody.addClass("media-body").attr("id",userLocation.cityID + "-media-body-" + i);
 
 		var eachNewsHeading = $("<a>");
-		eachNewsHeading.addClass("media-heading")
-		eachNewsHeading.attr("id",userLocation.cityID + "-media-heading-" + i)
+		eachNewsHeading.addClass("media-heading").attr("id",userLocation.cityID + "-media-heading-" + i);
 		eachNewsBody.append(eachNewsHeading)
 
 		var eachNewsSubHeading = $("<div>");
-		eachNewsSubHeading.addClass("media-subheading")
-		eachNewsSubHeading.attr("id",userLocation.cityID + "-media-subheading-" + i)
-		eachNewsBody.append(eachNewsSubHeading)
+		eachNewsSubHeading.addClass("media-subheading").attr("id",userLocation.cityID + "-media-subheading-" + i);
+		eachNewsBody.append(eachNewsSubHeading);
 
 		var eachNewsDescription = $("<div>");
-		eachNewsDescription.addClass("media-description")
-		eachNewsDescription.attr("id",userLocation.cityID + "-media-description-" + i)
-		eachNewsBody.append(eachNewsDescription)
+		eachNewsDescription.addClass("media-description").attr("id",userLocation.cityID + "-media-description-" + i);
+		eachNewsBody.append(eachNewsDescription);
 
+		eachNews.append(eachNewsImageArea, eachNewsBody);
 
-		console.log(userLocation.city);
-		$("#" + userLocation.cityID + '-media').append(eachNews)
-
+		if (i < 2){
+			var newsBorder = $("<div>");
+			newsBorder.addClass("news-border");
+			eachNews.append(newsBorder);
+		}
+		newsCard.append(eachNews);
 	}
+
+	$("#"+ userLocation.cityID + '-news-container').append(newsCard);
 }
 
 function populateNewsInfo (userLocation, news) {
-	for (var i=0; i<news.length; i++){
-		var newsName = $("#"+userLocation.cityID + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("href",news[i].url).attr("target","_blank");
-		var newsDescription = $("#"+userLocation.cityID + '-media-description-' + i).append(news[i].description);
-		var newssubHeading = $("#"+userLocation.cityID + '-media-subheading-' + i).append(news[i].provider[0].name).append(" - " + moment.parseZone(news[i].datePublished).local().fromNow());
-		 //  var newsURLs = NEWS[i].url;
-		 //var newsImage = $("#"+userLocation.cityID + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
+	for (var i = 0; i < news.length; i++){
+		$("#"+userLocation.cityID + '-media-heading-' + i).append(news[i].name.toUpperCase()).attr("href",news[i].url).attr("target","_blank");
+		$("#"+userLocation.cityID + '-media-description-' + i).append(news[i].description);
+		$("#"+userLocation.cityID + '-media-subheading-' + i).append(news[i].provider[0].name).append(" - " + moment.parseZone(news[i].datePublished).local().fromNow());
+
+		if(typeof news[i].image !== "undefined"){
+			$("#"+userLocation.cityID + '-media-image-' + i).attr("src", news[i].image.thumbnail.contentUrl);
+		}
+		else{
+			$("#"+userLocation.cityID + '-media-image-' + i).attr("src", "http://placehold.it/100x100");
 		}
 	}
+}
 
 
