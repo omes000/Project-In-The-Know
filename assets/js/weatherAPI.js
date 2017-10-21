@@ -1,11 +1,11 @@
-// Apixu API Weather js file
+/* Apixu API Weather js
+Documentation:  https://www.apixu.com/doc/ */
 
 // Create function to get weather
-function getWeather(cityName){}
-
+function getWeather(userLocation){
 	// Declaring apiKey and queryURL
 	var apiKey = "dcdb5e1e6d6e436d95224746171310"; 
-	var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+Number(lat).toFixed(2)+","+Number(long).toFixed(2)+"&days=5";
+	var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+userLocation.lat+","+userLocation.long+"&days=5";
 
 	// Create an AJAX call to retrieve data in console https://www.apixu.com/doc/forecast.aspx
 	$.ajax({
@@ -13,67 +13,44 @@ function getWeather(cityName){}
 		method: "GET"
 	}).done(function(response){
 		weather = response;
-
 		// Get array of forecast: temp(f),text,icon localtime.  Then output for each day for max/min temp, condition, icon and format of date.
+		var forecast = [];
+		for (var i = 0; i<5; i++){
+			var tempForecast = {};
 
-		forecast = [{
-			currentTemp: weather.current.temp_f,
-			currentCondition: weather.current.condition.text,
-			currentConditionIcon: weather.current.condition.icon,
-			currentTime: moment.unix(weather.location.localtime_epoch)
-				.format("hh:mm a")
-		},
-		{
-			dayOneMaxTemp:weather.forecast.forecastday[1].day.
-				maxtemp_f,
-			dayOneMinTemp: weather.forecast.forecastday[1].day.
-				mintemp_f,
-			dayOneCondition: weather.forecast.forecastday[1].day.
-				condition.text
-			dayOneConditionIcon: weather.forecast.forecastday[1].day.condition.icon,
-			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
-				).getDay())
-		},
-		{
-			dayTwoMaxTemp:weather.forecast.forecastday[2].day.
-				maxtemp_f,
-			dayTwoMinTemp: weather.forecast.forecastday[2].day.
-				mintemp_f,
-			dayTwoCondition: weather.forecast.forecastday[2].day.
-				condition.text
-			dayTwoConditionIcon: weather.forecast.forecastday[2].day.condition.icon,
-			dateTwo: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
-				).getDay())
-		},
-		{
-			dayThreeMaxTemp:weather.forecast.forecastday[3].day.
-				maxtemp_f,
-			dayThreeMinTemp: weather.forecast.forecastday[3].day.
-				mintemp_f,
-			dayThreeCondition: weather.forecast.forecastday[3].day.
-				condition.text
-			dayThreeConditionIcon: weather.forecast.forecastday[3].day.condition.icon,
-			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
-				).getDay())
+			/*The current temperature could have been stored separately, since the data is different. However, the desire was to only pass a single object, hence why this method of storing the data was chosen.*/
+			if (i === 0){
+				tempForecast = {
+					currentTemp: weather.current.temp_f,
+					currentHumidity: weather.current.humidity,
+					currentWindSpeed: weather.current.wind_mph.toFixed(0),
+					currentWindDirection: weather.current.wind_dir,
+					currentCondition: weather.current.condition.text,
+					currentConditionIcon: weather.current.condition.icon,
+					currentConditionCode: weather.current.condition.code,
+					currentConditionNewIcon: "",
+					currentTime: moment(weather.location.localtime).format("hh:mm"),
+					currentAMPM: moment(weather.location.localtime).format("A"),
+					currentDate: moment(weather.location.localtime).format("ddd MMM. DD")
+				};
+				forecast.push(tempForecast); 
+			}
+			else{
+				tempForecast = {
+					maxTemp:weather.forecast.forecastday[i].day.maxtemp_f,
+					minTemp: weather.forecast.forecastday[i].day.mintemp_f,
+					condition: weather.forecast.forecastday[i].day.condition.text,
+					conditionIcon: weather.forecast.forecastday[i].day.condition.icon,
+					conditionCode: weather.forecast.forecastday[i].day.condition.code,
+					conditionNewIcon: "",
+					date: getDayfromNum(new Date(weather.forecast.forecastday[i].date.replace(/-/, '/').replace(/-/,'/')).getDay())
+				};
+				forecast.push(tempForecast);
+			}
 		}
-		{
-			dayThreeMaxTemp:weather.forecast.forecastday[4].day.
-				maxtemp_f,
-			dayThreeMinTemp: weather.forecast.forecastday[4].day.
-				mintemp_f,
-			dayThreeCondition: weather.forecast.forecastday[4].day.
-				condition.text
-			dayThreeConditionIcon: weather.forecast.forecastday[4].day.condition.icon,
-			dateOne: getDayfromNum(new Date(weather.forecast.
-				forecastday[1].date.replace(/-/, '/').replace(/-/,'/')
-				).getDay())
-		}
-		];
 
-		buildWeatherWidget(cityName, forecast);
-		})
+		// Builds the Weather Widget
+		buildWeatherWidget(userLocation, forecast);
+	});
 }
 
