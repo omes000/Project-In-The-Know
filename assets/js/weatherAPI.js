@@ -5,7 +5,7 @@ Documentation:  https://www.apixu.com/doc/ */
 function getWeather(userLocation){
 	// Declaring apiKey and queryURL
 	var apiKey = "dcdb5e1e6d6e436d95224746171310"; 
-	var queryURL = "http://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+userLocation.lat+","+userLocation.long+"&days=5";
+	var queryURL = "https://api.apixu.com/v1/forecast.json?key="+apiKey+"&q="+userLocation.lat+","+userLocation.long+"&days=5";
 
 	// Create an AJAX call to retrieve data in console https://www.apixu.com/doc/forecast.aspx
 	$.ajax({
